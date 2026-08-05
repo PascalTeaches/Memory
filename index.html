@@ -79,7 +79,7 @@
         .game-board {
             display: grid;
             gap: 15px;
-            max-width: 800px;
+            max-width: 1000px;
             width: 100%;
             perspective: 1000px;
         }
@@ -89,7 +89,7 @@
         }
 
         .game-board.medium {
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(6, 1fr);
         }
 
         .game-board.hard {
@@ -198,7 +198,7 @@
 
         /* Mobile Responsiveness */
         @media (max-width: 600px) {
-            .game-board.hard {
+            .game-board.hard, .game-board.medium {
                 grid-template-columns: repeat(4, 1fr);
             }
             .card-front .word {
@@ -212,14 +212,14 @@
     <header>
         <h1>🎈 Word & Picture Match! 🎈</h1>
         <div class="controls">
-            <button class="btn active" onclick="setDifficulty('easy')">Easy (3 Pairs)</button>
-            <button class="btn" onclick="setDifficulty('medium')">Medium (6 Pairs)</button>
-            <button class="btn" onclick="setDifficulty('hard')">Hard (12 Pairs)</button>
+            <button class="btn active" onclick="setDifficulty('easy')">Easy (6 Pairs)</button>
+            <button class="btn" onclick="setDifficulty('medium')">Medium (12 Pairs)</button>
+            <button class="btn" onclick="setDifficulty('hard')">Hard (18 Pairs)</button>
             <button class="btn" style="background-color: #ffa502;" onclick="resetGame()">Restart</button>
         </div>
         <div class="stats">
             <div>⏱️ Time: <span id="timer">0</span>s</div>
-            <div>⭐ Matches: <span id="matches">0</span>/<span id="total-pairs">3</span></div>
+            <div>⭐ Matches: <span id="matches">0</span>/<span id="total-pairs">6</span></div>
         </div>
     </header>
 
@@ -247,14 +247,20 @@
             { id: 'pizza', word: 'Pizza', img: 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f355.svg' },
             { id: 'flower', word: 'Flower', img: 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f33c.svg' },
             { id: 'bear', word: 'Bear', img: 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f43b.svg' },
-            { id: 'fish', word: 'Fish', img: 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f41f.svg' }
+            { id: 'fish', word: 'Fish', img: 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f41f.svg' },
+            { id: 'monkey', word: 'Monkey', img: 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f435.svg' },
+            { id: 'lion', word: 'Lion', img: 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f981.svg' },
+            { id: 'turtle', word: 'Turtle', img: 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f422.svg' },
+            { id: 'octopus', word: 'Octopus', img: 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f419.svg' },
+            { id: 'cherries', word: 'Cherries', img: 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f352.svg' },
+            { id: 'cake', word: 'Cake', img: 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f370.svg' }
         ];
 
         let currentDifficulty = 'easy';
         let cards = [];
         let flippedCards = [];
         let matchedCount = 0;
-        let totalPairs = 3;
+        let totalPairs = 6;
         let timer = 0;
         let timerInterval = null;
         let gameStarted = false;
@@ -266,9 +272,9 @@
         const winModal = document.getElementById('winModal');
 
         const difficultySettings = {
-            easy: 3,
-            medium: 6,
-            hard: 12
+            easy: 6,
+            medium: 12,
+            hard: 18
         };
 
         function setDifficulty(level) {
